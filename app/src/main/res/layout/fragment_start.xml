@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2020 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +20,10 @@
     tools:context=".StartFragment">
 
     <data>
+        <variable
+            name="viewModel"
+            type="com.example.cupcake.model.OrderViewModel" />
+
         <variable
             name="startFragment"
             type="com.example.cupcake.StartFragment" />
@@ -54,25 +57,40 @@
                 android:textAppearance="?attr/textAppearanceHeadline4"
                 android:textColor="@color/material_on_background_emphasis_medium" />
 
-            <Button
-                android:id="@+id/order_one_cupcake"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_name"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
-                android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.orderCupcake(1)}"
-                android:text="@string/one_cupcake" />
+                android:layout_marginHorizontal="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/margin_between_elements"
+                android:hint="@string/name">
 
-            <Button
-                android:id="@+id/order_six_cupcakes"
-                android:layout_width="wrap_content"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textCapWords"
+                    android:text="@{viewModel.clientName}" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_phone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_between_elements"
-                android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.orderCupcake(6)}"
-                android:text="@string/six_cupcakes" />
+                android:layout_marginHorizontal="@dimen/side_margin"
+                android:hint="@string/phone">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edt_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="phone"
+                    android:text="@{viewModel.phoneNumber}"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
                 android:id="@+id/order_twelve_cupcakes"
@@ -81,8 +99,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:minWidth="@dimen/order_cupcake_button_width"
-                android:onClick="@{() -> startFragment.orderCupcake(12)}"
-                android:text="@string/twelve_cupcakes" />
+                android:onClick="@{() -> startFragment.orderCupcake()}"
+                android:text="@string/order" />
+
         </LinearLayout>
     </ScrollView>
 </layout>

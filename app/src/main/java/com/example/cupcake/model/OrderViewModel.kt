@@ -27,7 +27,7 @@ import java.util.Locale
 /** Price for a single cupcake */
 private const val PRICE_PER_CUPCAKE = 2.00
 
-/** Additional cost for same day pickup of an order */
+/** Additional cost for same day pickup of an order or delivery */
 private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
 /**
@@ -35,6 +35,14 @@ private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
  * pickup date. It also knows how to calculate the total price based on these order details.
  */
 class OrderViewModel : ViewModel() {
+
+    // Name of the person making the order
+    private val _clientName = MutableLiveData<String>()
+    val clientName: LiveData<String> = _clientName
+
+    // Phone number of the person making the order
+    private val _phoneNumber = MutableLiveData<String>()
+    val phoneNumber: LiveData<String> = _phoneNumber
 
     // Quantity of cupcakes in this order
     private val _quantity = MutableLiveData<Int>()
@@ -61,6 +69,24 @@ class OrderViewModel : ViewModel() {
     init {
         // Set initial values for the order
         resetOrder()
+    }
+
+    /**
+     * Set the name of the client for this order.
+     *
+     * @param nameOfClient to order
+     */
+    fun setName(nameOfClient: String) {
+        _clientName.value = nameOfClient
+    }
+
+    /**
+     * Set the phone number of the client for this order.
+     *
+     * @param phoneNumber to order
+     */
+    fun setPhoneNumber(phoneNumber: String) {
+        _phoneNumber.value = phoneNumber
     }
 
     /**
@@ -107,6 +133,8 @@ class OrderViewModel : ViewModel() {
         _flavor.value = ""
         _date.value = dateOptions[0]
         _price.value = 0.0
+        _clientName.value = ""
+        _phoneNumber.value = ""
     }
 
     /**

@@ -49,15 +49,24 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding?.startFragment = this
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            startFragment = this@StartFragment
+            viewModel = sharedViewModel
+        }
+
     }
 
     /**
      * Start an order with the desired quantity of cupcakes and navigate to the next screen.
      */
-    fun orderCupcake(quantity: Int) {
-        // Update the view model with the quantity
-        sharedViewModel.setQuantity(quantity)
+    fun orderCupcake() {
+//         Update the view model with the quantity
+//         sharedViewModel.setQuantity(quantity)
+
+        // Update the view model with the name and phone number
+        sharedViewModel.setName(binding?.edtName?.text.toString())
+        sharedViewModel.setPhoneNumber(binding?.edtPhone?.text.toString())
 
         // If no flavor is set in the view model yet, select vanilla as default flavor
         if (sharedViewModel.hasNoFlavorSet()) {
@@ -65,6 +74,13 @@ class StartFragment : Fragment() {
         }
 
         // Navigate to the next destination to select the flavor of the cupcakes
+        findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
+    }
+
+    /**
+     * Navigate to the next screen to see the order summary.
+     */
+    fun goToNextScreen() {
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
     }
 
