@@ -32,7 +32,7 @@ class FlavorAdapter(
     }
 
     override fun onBindViewHolder(holder: FlavorViewHolder, position: Int) {
-        var item = viewModel.flavors.value?.get(position)
+        val item = viewModel.flavors.value?.get(position)
         holder.image.setImageResource(R.drawable.cupcake)
         holder.name.text = item?.name
         holder.flavorQuantity.text = item?.quantity.toString()

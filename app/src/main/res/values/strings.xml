@@ -42,6 +42,7 @@
     <string name="name">Name</string>
     <string name="phone">Phone</string>
     <string name="order">Order</string>
+    <string name="order_observations">Observations:</string>
     <plurals name="cupcakes">
         <item quantity="one">%d cupcake</item>
         <item quantity="other">%d cupcakes</item>
