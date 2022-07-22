@@ -22,7 +22,7 @@ class FlavorAdapter(
     class FlavorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.imageView)
         val name: TextView = view.findViewById(R.id.tv_flavor)
-        val numberPicker: NumberPicker = view.findViewById(R.id.flavor_number_picker)
+        val flavorQuality: TextView = view.findViewById(R.id.flavor_quantity)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlavorViewHolder {
@@ -37,16 +37,7 @@ class FlavorAdapter(
         val item = dataset[position]
         holder.image.setImageResource(R.drawable.cupcake)
         holder.name.text = item.name
-        holder.numberPicker.apply {
-            value = item.quantity
-            minValue = 0
-            maxValue = 10
-            wrapSelectorWheel = true
-            setOnValueChangedListener { _, _, i2 ->
-                Toast.makeText(context, "$i2", Toast.LENGTH_SHORT).show()
-            }
-        }
-
+        holder.flavorQuality.text = item.quantity.toString()
     }
 
     override fun getItemCount() = dataset.size

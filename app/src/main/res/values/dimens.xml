@@ -23,7 +23,9 @@
     <dimen name="order_summary_margin">4dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>
     <dimen name="card_view_corner_radius">4dp</dimen>
+    <dimen name="button_picker_view_corner_radius">4dp</dimen>
     <dimen name="card_view_elevation">4dp</dimen>
     <dimen name="item_view_margin">4dp</dimen>
     <dimen name="item_view_size">50dp</dimen>
+    <dimen name="square_button_picker_size">28dp</dimen>
 </resources>

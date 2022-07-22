@@ -36,41 +36,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_flavor"
+            app:layout_constraintBottom_toBottomOf="@id/tv_flavor"
             android:layout_margin="@dimen/item_view_margin"
             android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-                app:icon="@drawable/add_button"
-                app:iconSize="10dp"
-                app:iconPadding="0dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+            <ImageButton
+                android:layout_width="@dimen/square_button_picker_size"
+                android:layout_height="@dimen/square_button_picker_size"
+                android:src="@drawable/ic_add_button"
+                android:scaleType="centerInside"
+                android:background="@drawable/picker_button" />
 
             <TextView
+                android:id="@+id/flavor_quantity"
+                style="?attr/textAppearanceBody2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                tools:text="10"/>
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/margin_between_elements"
+                android:textAlignment="center"
+                tools:text="10" />
 
-            <com.google.android.material.button.MaterialButton
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
-                app:icon="@drawable/add_button"
-                app:iconSize="10dp"
-                app:iconPadding="0dp"
-                android:insetLeft="0dp"
-                android:insetTop="0dp"
-                android:insetRight="0dp"
-                android:insetBottom="0dp"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.Button.Rounded"/>
+            <ImageButton
+                android:layout_width="@dimen/square_button_picker_size"
+                android:layout_height="@dimen/square_button_picker_size"
+                android:src="@drawable/ic_remove_button"
+                android:background="@drawable/picker_button"/>
+
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
