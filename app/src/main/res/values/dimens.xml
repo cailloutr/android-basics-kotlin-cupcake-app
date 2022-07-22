@@ -19,6 +19,8 @@
     <dimen name="order_cupcake_button_width">250dp</dimen>
     <dimen name="side_margin">16dp</dimen>
     <dimen name="margin_between_elements">8dp</dimen>
+    <dimen name="half_margin_between_elements">4dp</dimen>
+    <dimen name="padding_horizontal_text_number_picker">8dp</dimen>
     <dimen name="radio_button_padding">8dp</dimen>
     <dimen name="order_summary_margin">4dp</dimen>
     <dimen name="card_view_margin">8dp</dimen>

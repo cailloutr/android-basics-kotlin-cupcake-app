@@ -3,17 +3,10 @@ package com.example.cupcake.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.NumberPicker
-import android.widget.TextView
-import android.widget.Toast
-import androidx.recyclerview.widget.DiffUtil
+import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
-import com.example.cupcake.databinding.FlavorItemBinding
-import com.example.cupcake.databinding.FragmentStartBinding
 import com.example.cupcake.model.Flavor
-import kotlin.contracts.contract
 
 class FlavorAdapter(
     private val dataset: List<Flavor>,
@@ -22,7 +15,9 @@ class FlavorAdapter(
     class FlavorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.imageView)
         val name: TextView = view.findViewById(R.id.tv_flavor)
-        val flavorQuality: TextView = view.findViewById(R.id.flavor_quantity)
+        val flavorQuantity: TextView = view.findViewById(R.id.flavor_quantity)
+        val removeButton: ImageButton = view.findViewById(R.id.remove_button)
+        val addButton: ImageButton = view.findViewById(R.id.add_button)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlavorViewHolder {
@@ -37,7 +32,26 @@ class FlavorAdapter(
         val item = dataset[position]
         holder.image.setImageResource(R.drawable.cupcake)
         holder.name.text = item.name
-        holder.flavorQuality.text = item.quantity.toString()
+        holder.flavorQuantity.text = item.quantity.toString()
+
+        var txtQuantity = item.quantity
+        holder.removeButton.setOnClickListener {
+
+            // Min number of cupcakes per order
+            if (txtQuantity > 0) {
+                txtQuantity--
+                holder.flavorQuantity.text = (txtQuantity).toString()
+            }
+        }
+
+        holder.addButton.setOnClickListener {
+
+            // Max number of cupcakes per order
+            if (txtQuantity < 20) {
+                txtQuantity++
+                holder.flavorQuantity.text = txtQuantity.toString()
+            }
+        }
     }
 
     override fun getItemCount() = dataset.size

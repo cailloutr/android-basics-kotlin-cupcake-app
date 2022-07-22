@@ -44,6 +44,9 @@ class OrderViewModel : ViewModel() {
     private val _phoneNumber = MutableLiveData<String>()
     val phoneNumber: LiveData<String> = _phoneNumber
 
+    //List od flavors
+
+
     // Quantity of cupcakes in this order
     private val _quantity = MutableLiveData<Int>()
     val quantity: LiveData<Int> = _quantity
