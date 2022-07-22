@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake
+package com.example.cupcake.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,46 +22,65 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.cupcake.databinding.FragmentPickupBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.cupcake.R
+import com.example.cupcake.data.Datasource
+import com.example.cupcake.databinding.FragmentFlavorBinding
+import com.example.cupcake.databinding.FragmentFlavorNewBinding
 import com.example.cupcake.model.OrderViewModel
 
 /**
- * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
+ * [FlavorFragment] allows a user to choose a cupcake flavor for the order.
  */
-class PickupFragment : Fragment() {
+class FlavorFragment : Fragment() {
 
-    // Binding object instance corresponding to the fragment_pickup.xml layout
+    // Binding object instance corresponding to the fragment_flavor.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var binding: FragmentPickupBinding? = null
+    private var _binding: FragmentFlavorNewBinding? = null
+    private val binding get() = _binding!!
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
     private val sharedViewModel: OrderViewModel by activityViewModels()
+
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentPickupBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
+        val fragmentBinding = FragmentFlavorNewBinding.inflate(inflater, container, false)
+        _binding = fragmentBinding
         return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
+        binding.apply {
+            // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
+
+            // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
-            pickupFragment = this@PickupFragment
+
+            // Assign the fragment
+            flavorFragment = this@FlavorFragment
+
+            val dataset = Datasource.loadFlavor()
+
+            recyclerView = binding.flavorRecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter = FlavorAdapter(dataset)
         }
     }
 
     /**
-     * Navigate to the next screen to see the order summary.
+     * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
-        findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)
+        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
     }
 
     /**
@@ -72,7 +91,7 @@ class PickupFragment : Fragment() {
         sharedViewModel.resetOrder()
 
         // Navigate back to the [StartFragment] to start over
-        findNavController().navigate(R.id.action_pickupFragment_to_startFragment)
+        findNavController().navigate(R.id.action_flavorFragment_to_startFragment)
     }
 
     /**
@@ -81,6 +100,6 @@ class PickupFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }

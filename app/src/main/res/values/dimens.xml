@@ -21,4 +21,9 @@
     <dimen name="margin_between_elements">8dp</dimen>
     <dimen name="radio_button_padding">8dp</dimen>
     <dimen name="order_summary_margin">4dp</dimen>
+    <dimen name="card_view_margin">8dp</dimen>
+    <dimen name="card_view_corner_radius">4dp</dimen>
+    <dimen name="card_view_elevation">4dp</dimen>
+    <dimen name="item_view_margin">4dp</dimen>
+    <dimen name="item_view_size">50dp</dimen>
 </resources>

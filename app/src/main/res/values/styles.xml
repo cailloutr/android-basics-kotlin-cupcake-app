@@ -51,6 +51,12 @@
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
+    <!--Button Number Picker style-->
+    <style name="ShapeAppearanceOverlay.MyApp.Button.Rounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
     <!-- Divider style -->
     <style name="Widget.Cupcake.Divider" parent="">
         <item name="android:background">?attr/dividerHorizontal</item>

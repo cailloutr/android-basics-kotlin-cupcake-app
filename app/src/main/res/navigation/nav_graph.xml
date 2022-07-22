@@ -20,7 +20,7 @@
     app:startDestination="@id/startFragment">
     <fragment
         android:id="@+id/startFragment"
-        android:name="com.example.cupcake.StartFragment"
+        android:name="com.example.cupcake.ui.StartFragment"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_start">
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/flavorFragment"
-        android:name="com.example.cupcake.FlavorFragment"
+        android:name="com.example.cupcake.ui.FlavorFragment"
         android:label="@string/choose_flavor"
         tools:layout="@layout/fragment_flavor">
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/pickupFragment"
-        android:name="com.example.cupcake.PickupFragment"
+        android:name="com.example.cupcake.ui.PickupFragment"
         android:label="@string/choose_pickup_date"
         tools:layout="@layout/fragment_pickup">
         <action
@@ -57,7 +57,7 @@
     </fragment>
     <fragment
         android:id="@+id/summaryFragment"
-        android:name="com.example.cupcake.SummaryFragment"
+        android:name="com.example.cupcake.ui.SummaryFragment"
         android:label="@string/order_summary"
         tools:layout="@layout/fragment_summary">
         <action

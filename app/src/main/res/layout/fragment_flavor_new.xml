@@ -14,11 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<!-- Layout for selecting a pickup date -->
+<!-- Layout for selecting a flavor -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.PickupFragment">
+    tools:context=".ui.FlavorFragment">
 
     <data>
         <variable
@@ -26,8 +26,8 @@
             type="com.example.cupcake.model.OrderViewModel" />
 
         <variable
-            name="pickupFragment"
-            type="com.example.cupcake.ui.PickupFragment" />
+            name="flavorFragment"
+            type="com.example.cupcake.ui.FlavorFragment" />
     </data>
 
     <ScrollView
@@ -39,50 +39,17 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/side_margin">
 
-            <RadioGroup
-                android:id="@+id/date_options"
-                android:layout_width="wrap_content"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/flavor_recycler_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <RadioButton
-                    android:id="@+id/option0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="@{viewModel.date.equals(viewModel.dateOptions[0])}"
-                    android:onClick="@{() -> viewModel.setDate(viewModel.dateOptions[0])}"
-                    android:text="@{viewModel.dateOptions[0]}"
-                    tools:text="Thursday" />
-
-                <RadioButton
-                    android:id="@+id/option1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="@{viewModel.date.equals(viewModel.dateOptions[1])}"
-                    android:onClick="@{() -> viewModel.setDate(viewModel.dateOptions[1])}"
-                    android:text="@{viewModel.dateOptions[1]}"
-                    tools:text="Friday" />
-
-                <RadioButton
-                    android:id="@+id/option2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="@{viewModel.date.equals(viewModel.dateOptions[2])}"
-                    android:onClick="@{() -> viewModel.setDate(viewModel.dateOptions[2])}"
-                    android:text="@{viewModel.dateOptions[2]}"
-                    tools:text="Saturday" />
-
-                <RadioButton
-                    android:id="@+id/option3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="@{viewModel.date.equals(viewModel.dateOptions[3])}"
-                    android:onClick="@{() -> viewModel.setDate(viewModel.dateOptions[3])}"
-                    android:text="@{viewModel.dateOptions[3]}"
-                    tools:text="Sunday" />
-            </RadioGroup>
+                app:layout_constraintTop_toTopOf="parent"
+                tools:itemCount="6"
+                tools:listitem="@layout/flavor_item" />
 
             <View
                 android:id="@+id/divider"
@@ -90,10 +57,9 @@
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/side_margin"
-                android:layout_marginBottom="@dimen/side_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/date_options" />
+                app:layout_constraintTop_toBottomOf="@id/flavor_recycler_view" />
 
             <TextView
                 android:id="@+id/subtotal"
@@ -112,7 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/side_margin"
-                android:onClick="@{() -> pickupFragment.cancelOrder()}"
+                android:onClick="@{() -> flavorFragment.cancelOrder()}"
                 android:text="@string/cancel"
                 app:layout_constraintEnd_toStartOf="@id/next_button"
                 app:layout_constraintStart_toStartOf="parent"
@@ -123,7 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/side_margin"
-                android:onClick="@{() -> pickupFragment.goToNextScreen()}"
+                android:onClick="@{() -> flavorFragment.goToNextScreen()}"
                 android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

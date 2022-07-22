@@ -17,7 +17,7 @@
 <!-- Layout for order summary -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".SummaryFragment">
+    tools:context=".ui.SummaryFragment">
 
     <data>
         <variable
@@ -26,7 +26,7 @@
 
         <variable
             name="summaryFragment"
-            type="com.example.cupcake.SummaryFragment" />
+            type="com.example.cupcake.ui.SummaryFragment" />
     </data>
 
     <ScrollView

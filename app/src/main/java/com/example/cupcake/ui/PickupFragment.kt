@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake
+package com.example.cupcake.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,18 +22,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.cupcake.databinding.FragmentFlavorBinding
+import com.example.cupcake.R
+import com.example.cupcake.databinding.FragmentPickupBinding
 import com.example.cupcake.model.OrderViewModel
 
 /**
- * [FlavorFragment] allows a user to choose a cupcake flavor for the order.
+ * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
  */
-class FlavorFragment : Fragment() {
+class PickupFragment : Fragment() {
 
-    // Binding object instance corresponding to the fragment_flavor.xml layout
+    // Binding object instance corresponding to the fragment_pickup.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var binding: FragmentFlavorBinding? = null
+    private var binding: FragmentPickupBinding? = null
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
     private val sharedViewModel: OrderViewModel by activityViewModels()
@@ -42,7 +43,7 @@ class FlavorFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentFlavorBinding.inflate(inflater, container, false)
+        val fragmentBinding = FragmentPickupBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
     }
@@ -51,22 +52,17 @@ class FlavorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding?.apply {
-            // Specify the fragment as the lifecycle owner
             lifecycleOwner = viewLifecycleOwner
-
-            // Assign the view model to a property in the binding class
             viewModel = sharedViewModel
-
-            // Assign the fragment
-            flavorFragment = this@FlavorFragment
+            pickupFragment = this@PickupFragment
         }
     }
 
     /**
-     * Navigate to the next screen to choose pickup date.
+     * Navigate to the next screen to see the order summary.
      */
     fun goToNextScreen() {
-        findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
+        findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)
     }
 
     /**
@@ -77,7 +73,7 @@ class FlavorFragment : Fragment() {
         sharedViewModel.resetOrder()
 
         // Navigate back to the [StartFragment] to start over
-        findNavController().navigate(R.id.action_flavorFragment_to_startFragment)
+        findNavController().navigate(R.id.action_pickupFragment_to_startFragment)
     }
 
     /**

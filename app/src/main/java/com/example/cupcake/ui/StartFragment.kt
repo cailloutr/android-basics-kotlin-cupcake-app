@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.cupcake
+package com.example.cupcake.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,6 +22,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.cupcake.R
 import com.example.cupcake.databinding.FragmentStartBinding
 import com.example.cupcake.model.OrderViewModel
 
@@ -66,7 +67,7 @@ class StartFragment : Fragment() {
 
         // Update the view model with the name and phone number
         sharedViewModel.setName(binding?.edtName?.text.toString())
-        sharedViewModel.setPhoneNumber(binding?.edtPhone?.text.toString())
+        sharedViewModel.setPhoneNumber(binding?.edtName?.text.toString())
 
         // If no flavor is set in the view model yet, select vanilla as default flavor
         if (sharedViewModel.hasNoFlavorSet()) {

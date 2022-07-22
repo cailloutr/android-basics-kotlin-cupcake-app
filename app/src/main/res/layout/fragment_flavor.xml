@@ -18,7 +18,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".FlavorFragment">
+    tools:context=".ui.FlavorFragment">
 
     <data>
         <variable
@@ -27,7 +27,7 @@
 
         <variable
             name="flavorFragment"
-            type="com.example.cupcake.FlavorFragment" />
+            type="com.example.cupcake.ui.FlavorFragment" />
     </data>
 
     <ScrollView
