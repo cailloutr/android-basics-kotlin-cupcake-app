@@ -4,13 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
 import com.example.cupcake.model.Flavor
+import com.example.cupcake.model.OrderViewModel
 
 class FlavorAdapter(
-    private val dataset: List<Flavor>,
+    private val viewModel: OrderViewModel
 ) : RecyclerView.Adapter<FlavorAdapter.FlavorViewHolder>() {
+
 
     class FlavorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.imageView)
@@ -29,31 +32,32 @@ class FlavorAdapter(
     }
 
     override fun onBindViewHolder(holder: FlavorViewHolder, position: Int) {
-        val item = dataset[position]
+        var item = viewModel.flavors.value?.get(position)
         holder.image.setImageResource(R.drawable.cupcake)
-        holder.name.text = item.name
-        holder.flavorQuantity.text = item.quantity.toString()
+        holder.name.text = item?.name
+        holder.flavorQuantity.text = item?.quantity.toString()
 
-        var txtQuantity = item.quantity
         holder.removeButton.setOnClickListener {
 
             // Min number of cupcakes per order
-            if (txtQuantity > 0) {
-                txtQuantity--
-                holder.flavorQuantity.text = (txtQuantity).toString()
+            if (item?.quantity!! > 0) {
+                item.quantity--
+                holder.flavorQuantity.text = (item.quantity).toString()
+                viewModel.flavors.value?.get(position)?.quantity = item.quantity
             }
         }
 
         holder.addButton.setOnClickListener {
 
             // Max number of cupcakes per order
-            if (txtQuantity < 20) {
-                txtQuantity++
-                holder.flavorQuantity.text = txtQuantity.toString()
+            if (item?.quantity!! < 20) {
+                item.quantity++
+                holder.flavorQuantity.text = item.quantity.toString()
+                viewModel.flavors.value?.get(position)?.quantity = item.quantity
             }
         }
     }
 
-    override fun getItemCount() = dataset.size
+    override fun getItemCount(): Int = viewModel.flavors.value?.size!!
 
 }

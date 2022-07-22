@@ -21,19 +21,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
 import com.example.cupcake.data.Datasource
-import com.example.cupcake.databinding.FragmentFlavorBinding
 import com.example.cupcake.databinding.FragmentFlavorNewBinding
 import com.example.cupcake.model.OrderViewModel
 
 /**
  * [FlavorFragment] allows a user to choose a cupcake flavor for the order.
  */
-class FlavorFragment : Fragment() {
+class FlavorFragment : Fragment(), LifecycleOwner {
 
     // Binding object instance corresponding to the fragment_flavor.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
@@ -72,7 +72,7 @@ class FlavorFragment : Fragment() {
 
             recyclerView = binding.flavorRecyclerView
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = FlavorAdapter(dataset)
+            recyclerView.adapter = FlavorAdapter(sharedViewModel)
         }
     }
 

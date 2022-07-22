@@ -19,6 +19,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.example.cupcake.data.Datasource
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -44,16 +45,13 @@ class OrderViewModel : ViewModel() {
     private val _phoneNumber = MutableLiveData<String>()
     val phoneNumber: LiveData<String> = _phoneNumber
 
-    //List od flavors
-
-
     // Quantity of cupcakes in this order
     private val _quantity = MutableLiveData<Int>()
     val quantity: LiveData<Int> = _quantity
 
     // Cupcake flavor for this order
-    private val _flavor = MutableLiveData<String>()
-    val flavor: LiveData<String> = _flavor
+    private val _flavors = MutableLiveData<List<Flavor>>()
+    val flavors: LiveData<List<Flavor>> = _flavors
 
     // Possible date options
     val dateOptions: List<String> = getPickupOptions()
@@ -107,8 +105,8 @@ class OrderViewModel : ViewModel() {
      *
      * @param desiredFlavor is the cupcake flavor as a string
      */
-    fun setFlavor(desiredFlavor: String) {
-        _flavor.value = desiredFlavor
+    fun setFlavor(desiredFlavor: Flavor) {
+        _flavors.value = _flavors.value?.plus(desiredFlavor) ?: listOf(desiredFlavor)
     }
 
     /**
@@ -125,7 +123,7 @@ class OrderViewModel : ViewModel() {
      * Returns true if a flavor has not been selected for the order yet. Returns false otherwise.
      */
     fun hasNoFlavorSet(): Boolean {
-        return _flavor.value.isNullOrEmpty()
+        return _flavors.value.isNullOrEmpty()
     }
 
     /**
@@ -133,7 +131,7 @@ class OrderViewModel : ViewModel() {
      */
     fun resetOrder() {
         _quantity.value = 0
-        _flavor.value = ""
+        _flavors.postValue(Datasource.loadFlavor())
         _date.value = dateOptions[0]
         _price.value = 0.0
         _clientName.value = ""
@@ -164,5 +162,9 @@ class OrderViewModel : ViewModel() {
             calendar.add(Calendar.DATE, 1)
         }
         return options
+    }
+
+    fun getFlavorList(): LiveData<List<Flavor>> {
+        return flavors
     }
 }

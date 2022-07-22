@@ -69,11 +69,6 @@ class StartFragment : Fragment() {
         sharedViewModel.setName(binding?.edtName?.text.toString())
         sharedViewModel.setPhoneNumber(binding?.edtName?.text.toString())
 
-        // If no flavor is set in the view model yet, select vanilla as default flavor
-        if (sharedViewModel.hasNoFlavorSet()) {
-            sharedViewModel.setFlavor(getString(R.string.vanilla))
-        }
-
         // Navigate to the next destination to select the flavor of the cupcakes
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
     }

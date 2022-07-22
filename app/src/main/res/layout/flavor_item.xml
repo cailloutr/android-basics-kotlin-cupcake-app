@@ -1,70 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    tools:context=".ui.FlavorFragment" >
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.cupcake.model.OrderViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="@dimen/item_view_size"
-            android:layout_height="@dimen/item_view_size"
-            android:layout_margin="@dimen/item_view_margin"
-            android:importantForAccessibility="no"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_launcher_foreground" />
-
-        <TextView
-            android:id="@+id/tv_flavor"
-            style="?attr/textAppearanceSubtitle2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_between_elements"
-            app:layout_constraintBottom_toBottomOf="@id/imageView"
-            app:layout_constraintStart_toEndOf="@id/imageView"
-            app:layout_constraintTop_toTopOf="@id/imageView"
-            tools:text="Flavor" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/item_view_margin"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="@id/tv_flavor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_flavor">
-
-            <ImageButton
-                android:id="@+id/remove_button"
-                android:layout_width="@dimen/square_button_picker_size"
-                android:layout_height="@dimen/square_button_picker_size"
-                android:src="@drawable/ic_remove_button"
-                style="@style/Widget.Cupcake.ImageButton.NumberPicker" />
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="@dimen/item_view_size"
+                android:layout_height="@dimen/item_view_size"
+                android:layout_margin="@dimen/item_view_margin"
+                android:importantForAccessibility="no"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_launcher_foreground" />
 
             <TextView
-                android:id="@+id/flavor_quantity"
-                style="@style/Widget.Cupcake.TextView.NumberPicker"
-                android:layout_width="40dp"
-                android:layout_height="match_parent"
-                tools:text="10" />
+                android:id="@+id/tv_flavor"
+                style="?attr/textAppearanceSubtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_between_elements"
+                app:layout_constraintBottom_toBottomOf="@id/imageView"
+                app:layout_constraintStart_toEndOf="@id/imageView"
+                app:layout_constraintTop_toTopOf="@id/imageView"
+                tools:text="Flavor" />
 
-            <ImageButton
-                android:id="@+id/add_button"
-                android:layout_width="@dimen/square_button_picker_size"
-                android:layout_height="@dimen/square_button_picker_size"
-                android:src="@drawable/ic_add_button"
-                style="@style/Widget.Cupcake.ImageButton.NumberPicker"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/item_view_margin"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="@id/tv_flavor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_flavor">
 
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                    android:id="@+id/remove_button"
+                    android:layout_width="@dimen/square_button_picker_size"
+                    android:layout_height="@dimen/square_button_picker_size"
+                    android:src="@drawable/ic_remove_button"
+                    style="@style/Widget.Cupcake.ImageButton.NumberPicker" />
 
-</com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:id="@+id/flavor_quantity"
+                    style="@style/Widget.Cupcake.TextView.NumberPicker"
+                    android:layout_width="40dp"
+                    android:layout_height="match_parent"
+                    tools:text="10" />
+
+                <ImageButton
+                    android:id="@+id/add_button"
+                    android:layout_width="@dimen/square_button_picker_size"
+                    android:layout_height="@dimen/square_button_picker_size"
+                    android:src="@drawable/ic_add_button"
+                    style="@style/Widget.Cupcake.ImageButton.NumberPicker"/>
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
 
 
