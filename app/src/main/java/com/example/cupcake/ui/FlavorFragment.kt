@@ -48,7 +48,7 @@ class FlavorFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         val fragmentBinding = FragmentFlavorNewBinding.inflate(inflater, container, false)
         _binding = fragmentBinding

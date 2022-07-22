@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Text Appearance Subtitle1 style -->
     <style name="TextAppearance.Cupcake.Subtitle1"
         parent="TextAppearance.MaterialComponents.Subtitle1">
@@ -51,8 +51,22 @@
         <item name="android:textAppearance">?attr/textAppearanceBody1</item>
     </style>
 
+    <!-- Text Number Picker style -->
+    <style name="Widget.Cupcake.TextView.NumberPicker"
+        parent="Widget.MaterialComponents.TextView">
+        <item name="android:gravity">center</item>
+        <item name="android:paddingHorizontal" tools:targetApi="o">@dimen/margin_between_elements</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">?attr/textAppearanceBody2</item>
+    </style>
+
     <!-- Divider style -->
     <style name="Widget.Cupcake.Divider" parent="">
         <item name="android:background">?attr/dividerHorizontal</item>
+    </style>
+
+    <style name="Widget.Cupcake.ImageButton.NumberPicker" parent="Widget.AppCompat.ImageButton">
+        <item name="android:background">@drawable/picker_button</item>
+        <item name="android:scaleType">centerInside</item>
     </style>
 </resources>

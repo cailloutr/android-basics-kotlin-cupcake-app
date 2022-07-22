@@ -16,7 +16,7 @@ import com.example.cupcake.model.Flavor
 import kotlin.contracts.contract
 
 class FlavorAdapter(
-    private val dataset: List<Flavor>
+    private val dataset: List<Flavor>,
 ) : RecyclerView.Adapter<FlavorAdapter.FlavorViewHolder>() {
 
     class FlavorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
