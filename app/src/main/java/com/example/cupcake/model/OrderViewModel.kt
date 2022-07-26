@@ -15,6 +15,7 @@
  */
 package com.example.cupcake.model
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -26,16 +27,20 @@ import java.util.Calendar
 import java.util.Locale
 
 /** Price for a single cupcake */
-private const val PRICE_PER_CUPCAKE = 2.00
+const val PRICE_PER_CUPCAKE = 2.00
 
 /** Additional cost for same day pickup of an order or delivery */
-private const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
+const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
 /**
  * [OrderViewModel] holds information about a cupcake order in terms of quantity, flavor, and
  * pickup date. It also knows how to calculate the total price based on these order details.
  */
 class OrderViewModel : ViewModel() {
+
+    // TODO: Update the summary layout and fragment to accommodate the new elements
+    // TODO: update the price methods to calculate the right price
+    // TODO: create the methods and attributes for the new pickup option and elements
 
     // Name of the person making the order
     private val _clientName = MutableLiveData<String>()
@@ -53,6 +58,10 @@ class OrderViewModel : ViewModel() {
     private val _flavors = MutableLiveData<List<Flavor>>()
     val flavors: LiveData<List<Flavor>> = _flavors
 
+    // Order's observations
+    private val _observations = MutableLiveData<String>()
+    val observations: LiveData<String> = _observations
+
     // Possible date options
     val dateOptions: List<String> = getPickupOptions()
 
@@ -67,9 +76,59 @@ class OrderViewModel : ViewModel() {
         NumberFormat.getCurrencyInstance().format(it)
     }
 
+    // Delivery = 2 or in store pickup = 1
+    private val _pickupOption = MutableLiveData<Int>()
+    val pickupOption: LiveData<Int> = _pickupOption
+
+    // Order list containing exclusively the cupcakes ordered
+    private val _orderList = MutableLiveData<List<Flavor>>()
+    val orderList: LiveData<List<Flavor>> = _orderList
+
     init {
         // Set initial values for the order
         resetOrder()
+    }
+
+
+    /**
+     *
+     */
+    fun setOrderList() {
+        val list = mutableListOf<Flavor>()
+
+        for (flavor in flavors.value!!) {
+            if (flavor in list) {
+                if (flavor.quantity == 0) {
+                    list.remove(flavor)
+                }
+            } else {
+                if (flavor.quantity > 0) {
+                    list.add(flavor)
+                }
+            }
+        }
+
+        _orderList.value = list
+    }
+
+
+    /**
+     * Set the pickup option for this order.
+     *
+     * @param option to order
+     */
+    fun setPickupOption(option: Int) {
+        _pickupOption.value = option
+        updatePrice()
+    }
+
+    /**
+     * Set the observations for this order.
+     *
+     * @param observations to order
+     */
+    fun setObservations(observations: String) {
+        _observations.value = observations
     }
 
     /**
@@ -95,15 +154,28 @@ class OrderViewModel : ViewModel() {
      *
      * @param numberCupcakes to order
      */
-    fun setQuantity(numberCupcakes: Int) {
-        _quantity.value = numberCupcakes
+    fun setUnitQuantity(flavor: Flavor, numberCupcakes: Int) {
+        flavor.quantity = numberCupcakes
         updatePrice()
     }
+
+
+    /**
+     * Set the total quantity of cupcakes for this order.
+     */
+    private fun setTotalQuantity() {
+        var quantity = 0
+        for (flavor in flavors.value!!) {
+            quantity += flavor.quantity
+        }
+        _quantity.value = quantity
+    }
+
 
     /**
      * Set the flavor of cupcakes for this order. Only 1 flavor can be selected for the whole order.
      *
-     * @param desiredFlavor is the cupcake flavor as a string
+     * @param desiredFlavor is the cupcake flavor as a List of Flavor
      */
     fun setFlavor(desiredFlavor: Flavor) {
         _flavors.value = _flavors.value?.plus(desiredFlavor) ?: listOf(desiredFlavor)
@@ -136,17 +208,25 @@ class OrderViewModel : ViewModel() {
         _price.value = 0.0
         _clientName.value = ""
         _phoneNumber.value = ""
+        _pickupOption.value = 1
     }
 
     /**
      * Updates the price based on the order details.
      */
     private fun updatePrice() {
-        var calculatedPrice = (quantity.value ?: 0) * PRICE_PER_CUPCAKE
-        // If the user selected the first option (today) for pickup, add the surcharge
-        if (dateOptions[0] == _date.value) {
-            calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
+
+        setTotalQuantity()
+        var calculatedPrice: Double = quantity.value?.times(PRICE_PER_CUPCAKE) ?: 0.0
+        Log.d("OrderViewModel", "${quantity.value}")
+
+        if (calculatedPrice != 0.0) {
+            // If the user selected the first option (today) for pickup or delivery, add the surcharge
+            if ((dateOptions[0] == _date.value) || pickupOption.value == 2) { // 2 = Delivery
+                calculatedPrice += PRICE_FOR_SAME_DAY_PICKUP
+            }
         }
+
         _price.value = calculatedPrice
     }
 

@@ -25,6 +25,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.cupcake.R
 import com.example.cupcake.databinding.FragmentPickupBinding
 import com.example.cupcake.model.OrderViewModel
+import com.example.cupcake.model.PRICE_FOR_SAME_DAY_PICKUP
+import java.text.NumberFormat
+import java.util.*
 
 /**
  * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
@@ -55,6 +58,10 @@ class PickupFragment : Fragment() {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
             pickupFragment = this@PickupFragment
+
+            tvObservationsPickup.text =
+                getString(R.string.pickup_options_obs, NumberFormat.getCurrencyInstance().format(
+                    PRICE_FOR_SAME_DAY_PICKUP))
         }
     }
 
@@ -62,6 +69,7 @@ class PickupFragment : Fragment() {
      * Navigate to the next screen to see the order summary.
      */
     fun goToNextScreen() {
+        sharedViewModel.setOrderList()
         findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)
     }
 

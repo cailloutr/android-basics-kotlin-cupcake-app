@@ -1,18 +1,24 @@
 package com.example.cupcake.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
-import com.example.cupcake.model.Flavor
 import com.example.cupcake.model.OrderViewModel
 
 class FlavorAdapter(
-    private val viewModel: OrderViewModel
-) : RecyclerView.Adapter<FlavorAdapter.FlavorViewHolder>() {
+    private val viewModel: OrderViewModel,
+    private val fragmentCaller: Int,
+    private val context: Context,
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        const val FLAVOR_CALLER = 1
+        const val SUMMARY_CALLER = 2
+    }
 
 
     class FlavorViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -23,41 +29,78 @@ class FlavorAdapter(
         val addButton: ImageButton = view.findViewById(R.id.add_button)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FlavorViewHolder {
-
-        val adapterLayout = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.flavor_item, parent, false)
-        return FlavorViewHolder(adapterLayout)
+    class SummaryViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val image: ImageView = view.findViewById(R.id.imageView)
+        val name: TextView = view.findViewById(R.id.tv_flavor)
+        val flavorQuantity: TextView = view.findViewById(R.id.tv_flavor_quantity)
     }
 
-    override fun onBindViewHolder(holder: FlavorViewHolder, position: Int) {
-        val item = viewModel.flavors.value?.get(position)
-        holder.image.setImageResource(R.drawable.cupcake)
-        holder.name.text = item?.name
-        holder.flavorQuantity.text = item?.quantity.toString()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        holder.removeButton.setOnClickListener {
-
-            // Min number of cupcakes per order
-            if (item?.quantity!! > 0) {
-                item.quantity--
-                holder.flavorQuantity.text = (item.quantity).toString()
-                viewModel.flavors.value?.get(position)?.quantity = item.quantity
-            }
-        }
-
-        holder.addButton.setOnClickListener {
-
-            // Max number of cupcakes per order
-            if (item?.quantity!! < 20) {
-                item.quantity++
-                holder.flavorQuantity.text = item.quantity.toString()
-                viewModel.flavors.value?.get(position)?.quantity = item.quantity
-            }
+        return if (fragmentCaller == 2) {
+            val view = LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.summary_item, parent, false)
+            SummaryViewHolder(view)
+        } else {
+            val view = LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.flavor_item, parent, false)
+            FlavorViewHolder(view)
         }
     }
 
-    override fun getItemCount(): Int = viewModel.flavors.value?.size!!
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+        if (fragmentCaller == FLAVOR_CALLER) {
+            val item = viewModel.flavors.value?.get(position)
+            val viewHolder = FlavorViewHolder(holder.itemView)
+            viewHolder.image.setImageResource(R.drawable.cupcake)
+            viewHolder.name.text = item?.name
+            viewHolder.flavorQuantity.text = item?.quantity.toString()
+
+            viewHolder.removeButton.setOnClickListener {
+
+                // Min number of cupcakes per order
+                if (item?.quantity!! > 0) {
+                    item.quantity--
+                    viewHolder.flavorQuantity.text = (item.quantity).toString()
+                    //viewModel.flavors.value?.get(position)?.quantity = item.quantity
+                    viewModel.flavors.value?.get(position)?.let { it1 ->
+                        viewModel.setUnitQuantity(it1, item.quantity)
+                    }
+                }
+            }
+
+            viewHolder.addButton.setOnClickListener {
+
+                // Max number of cupcakes per order
+                if (item?.quantity!! < 20) {
+                    item.quantity++
+                    viewHolder.flavorQuantity.text = item.quantity.toString()
+                    viewModel.flavors.value?.get(position)?.quantity = item.quantity
+                    viewModel.flavors.value?.get(position)?.let { it1 ->
+                        viewModel.setUnitQuantity(it1, item.quantity)
+                    }
+                }
+            }
+        } else {
+            val item = viewModel.orderList.value?.get(position)
+            val viewHolder = SummaryViewHolder(holder.itemView)
+            viewHolder.image.setImageResource(R.drawable.cupcake)
+            viewHolder.name.text = item?.name
+            viewHolder.flavorQuantity.text =
+                context.getString(R.string.summary_unit_count, item?.quantity.toString())
+        }
+
+    }
+
+    override fun getItemCount(): Int {
+        return if (fragmentCaller == FLAVOR_CALLER) {
+            viewModel.flavors.value?.size!!
+        } else {
+            viewModel.orderList.value?.size!!
+        }
+    }
 
 }

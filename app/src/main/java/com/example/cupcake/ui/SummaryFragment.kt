@@ -22,41 +22,54 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
+import com.example.cupcake.databinding.FragmentFlavorNewBinding
 import com.example.cupcake.databinding.FragmentSummaryBinding
+import com.example.cupcake.databinding.FragmentSummaryNewBinding
 import com.example.cupcake.model.OrderViewModel
 
 /**
  * [SummaryFragment] contains a summary of the order details with a button to share the order
  * via another app.
  */
-class SummaryFragment : Fragment() {
+class SummaryFragment : Fragment(), LifecycleOwner {
 
     // Binding object instance corresponding to the fragment_summary.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var binding: FragmentSummaryBinding? = null
+    private var _binding: FragmentSummaryNewBinding? = null
+    private val binding get() = _binding!!
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
     private val sharedViewModel: OrderViewModel by activityViewModels()
+
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val fragmentBinding = FragmentSummaryBinding.inflate(inflater, container, false)
-        binding = fragmentBinding
+        val fragmentBinding = FragmentSummaryNewBinding.inflate(inflater, container, false)
+        _binding = fragmentBinding
         return fragmentBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.apply {
+        binding.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
             summaryFragment = this@SummaryFragment
+
+            recyclerView = binding.summaryRecyclerView
+            recyclerView.layoutManager = LinearLayoutManager(context)
+            recyclerView.adapter =
+                FlavorAdapter(sharedViewModel, FlavorAdapter.SUMMARY_CALLER, requireContext())
         }
     }
 
@@ -105,6 +118,6 @@ class SummaryFragment : Fragment() {
      */
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 }

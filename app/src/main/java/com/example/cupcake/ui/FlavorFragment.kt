@@ -68,11 +68,10 @@ class FlavorFragment : Fragment(), LifecycleOwner {
             // Assign the fragment
             flavorFragment = this@FlavorFragment
 
-            val dataset = Datasource.loadFlavor()
-
             recyclerView = binding.flavorRecyclerView
             recyclerView.layoutManager = LinearLayoutManager(context)
-            recyclerView.adapter = FlavorAdapter(sharedViewModel)
+            recyclerView.adapter =
+                FlavorAdapter(sharedViewModel, FlavorAdapter.FLAVOR_CALLER, requireContext())
         }
     }
 
@@ -80,6 +79,10 @@ class FlavorFragment : Fragment(), LifecycleOwner {
      * Navigate to the next screen to choose pickup date.
      */
     fun goToNextScreen() {
+        // Save the observations on the view model
+        sharedViewModel.setObservations(binding.tilObservation.editText?.text.toString())
+
+        // Go to next screen
         findNavController().navigate(R.id.action_flavorFragment_to_pickupFragment)
     }
 

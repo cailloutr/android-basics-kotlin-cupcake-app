@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
      Copyright (C) 2020 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
@@ -21,6 +20,7 @@
     tools:context=".ui.PickupFragment">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.cupcake.model.OrderViewModel" />
@@ -39,13 +39,80 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/side_margin">
 
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_pickup_option_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pickup_options"
+                android:textAppearance="?attr/textAppearanceSubtitle1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <RadioGroup
+                android:id="@+id/rg_pickup_option"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_pickup_option_type">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/radio_button_padding"
+                    android:layout_marginStart="@dimen/half_margin_between_elements"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_store" />
+
+                <RadioButton
+                    android:id="@+id/rb_in_store_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/half_margin_between_elements"
+                    android:checked="@{viewModel.pickupOption.equals(1)}"
+                    android:onClick="@{() -> viewModel.setPickupOption(1)}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    tools:text="In Store" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginEnd="@dimen/radio_button_padding"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_delivery_dining" />
+
+                <RadioButton
+                    android:id="@+id/delivery_option"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@{viewModel.pickupOption.equals(2)}"
+                    android:onClick="@{() -> viewModel.setPickupOption(2)}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    tools:text="Delivery" />
+
+            </RadioGroup>
+
+            <View
+                android:id="@+id/divider1"
+                style="@style/Widget.Cupcake.Divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginBottom="@dimen/side_margin"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rg_pickup_option" />
+
             <RadioGroup
                 android:id="@+id/date_options"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/side_margin"
                 android:orientation="vertical"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@id/divider1">
 
                 <RadioButton
                     android:id="@+id/option0"
@@ -129,6 +196,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/cancel_button"
                 app:layout_constraintTop_toBottomOf="@id/subtotal" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_observations_pickup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_between_elements"
+                android:textAppearance="?attr/textAppearanceBody2"
+                app:layout_constraintTop_toBottomOf="@id/next_button"
+                tools:text="Obs: x flavor only available after 2 days" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

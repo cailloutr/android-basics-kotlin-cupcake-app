@@ -42,42 +42,22 @@
                 app:layout_constraintTop_toTopOf="@id/imageView"
                 tools:text="Flavor" />
 
-            <LinearLayout
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_flavor_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/item_view_margin"
-                android:orientation="horizontal"
-                android:visibility="visible"
+                android:layout_marginEnd="@dimen/card_view_margin"
+                android:background="@drawable/picker_button"
+                android:padding="@dimen/half_margin_between_elements"
+                android:textAppearance="?attr/textAppearanceSubtitle2"
+                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@id/tv_flavor"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/tv_flavor">
-
-                <ImageButton
-                    android:id="@+id/remove_button"
-                    style="@style/Widget.Cupcake.ImageButton.NumberPicker"
-                    android:layout_width="@dimen/square_button_picker_size"
-                    android:layout_height="@dimen/square_button_picker_size"
-                    android:src="@drawable/ic_remove_button" />
-
-                <TextView
-                    android:id="@+id/flavor_quantity"
-                    style="@style/Widget.Cupcake.TextView.NumberPicker"
-                    android:layout_width="40dp"
-                    android:layout_height="match_parent"
-                    tools:text="10" />
-
-                <ImageButton
-                    android:id="@+id/add_button"
-                    style="@style/Widget.Cupcake.ImageButton.NumberPicker"
-                    android:layout_width="@dimen/square_button_picker_size"
-                    android:layout_height="@dimen/square_button_picker_size"
-                    android:src="@drawable/ic_add_button" />
-
-            </LinearLayout>
+                app:layout_constraintTop_toTopOf="@id/tv_flavor"
+                tools:text="5 un." />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>
-
-
