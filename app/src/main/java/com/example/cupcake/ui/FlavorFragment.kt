@@ -27,7 +27,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
 import com.example.cupcake.data.Datasource
-import com.example.cupcake.databinding.FragmentFlavorNewBinding
+import com.example.cupcake.databinding.FragmentFlavorBinding
 import com.example.cupcake.model.OrderViewModel
 
 /**
@@ -38,7 +38,7 @@ class FlavorFragment : Fragment(), LifecycleOwner {
     // Binding object instance corresponding to the fragment_flavor.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var _binding: FragmentFlavorNewBinding? = null
+    private var _binding: FragmentFlavorBinding? = null
     private val binding get() = _binding!!
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
@@ -49,8 +49,8 @@ class FlavorFragment : Fragment(), LifecycleOwner {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
-        val fragmentBinding = FragmentFlavorNewBinding.inflate(inflater, container, false)
+    ): View {
+        val fragmentBinding = FragmentFlavorBinding.inflate(inflater, container, false)
         _binding = fragmentBinding
         return fragmentBinding.root
     }

@@ -80,7 +80,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:maxLength="140"
-                    android:text="@{viewModel.observations}"/>
+                    android:text="@{viewModel.observations}" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView

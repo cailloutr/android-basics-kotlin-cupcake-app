@@ -27,7 +27,6 @@ import com.example.cupcake.databinding.FragmentPickupBinding
 import com.example.cupcake.model.OrderViewModel
 import com.example.cupcake.model.PRICE_FOR_SAME_DAY_PICKUP
 import java.text.NumberFormat
-import java.util.*
 
 /**
  * [PickupFragment] allows the user to choose a pickup date for the cupcake order.
@@ -44,8 +43,8 @@ class PickupFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         val fragmentBinding = FragmentPickupBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root

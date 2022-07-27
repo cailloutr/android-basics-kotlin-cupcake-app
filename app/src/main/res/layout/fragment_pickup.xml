@@ -60,8 +60,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginEnd="@dimen/radio_button_padding"
                     android:layout_marginStart="@dimen/half_margin_between_elements"
+                    android:layout_marginEnd="@dimen/radio_button_padding"
                     android:importantForAccessibility="no"
                     android:src="@drawable/ic_store" />
 

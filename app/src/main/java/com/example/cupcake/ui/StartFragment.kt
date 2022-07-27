@@ -41,8 +41,8 @@ class StartFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         val fragmentBinding = FragmentStartBinding.inflate(inflater, container, false)
         binding = fragmentBinding
         return fragmentBinding.root
@@ -70,13 +70,6 @@ class StartFragment : Fragment() {
         sharedViewModel.setPhoneNumber(binding?.edtName?.text.toString())
 
         // Navigate to the next destination to select the flavor of the cupcakes
-        findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
-    }
-
-    /**
-     * Navigate to the next screen to see the order summary.
-     */
-    fun goToNextScreen() {
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)
     }
 

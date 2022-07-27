@@ -27,9 +27,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
-import com.example.cupcake.databinding.FragmentFlavorNewBinding
 import com.example.cupcake.databinding.FragmentSummaryBinding
-import com.example.cupcake.databinding.FragmentSummaryNewBinding
+import com.example.cupcake.model.IN_STORE_OPTION
 import com.example.cupcake.model.OrderViewModel
 
 /**
@@ -41,7 +40,7 @@ class SummaryFragment : Fragment(), LifecycleOwner {
     // Binding object instance corresponding to the fragment_summary.xml layout
     // This property is non-null between the onCreateView() and onDestroyView() lifecycle callbacks,
     // when the view hierarchy is attached to the fragment.
-    private var _binding: FragmentSummaryNewBinding? = null
+    private var _binding: FragmentSummaryBinding? = null
     private val binding get() = _binding!!
 
     // Use the 'by activityViewModels()' Kotlin property delegate from the fragment-ktx artifact
@@ -51,9 +50,9 @@ class SummaryFragment : Fragment(), LifecycleOwner {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val fragmentBinding = FragmentSummaryNewBinding.inflate(inflater, container, false)
+        savedInstanceState: Bundle?,
+    ): View {
+        val fragmentBinding = FragmentSummaryBinding.inflate(inflater, container, false)
         _binding = fragmentBinding
         return fragmentBinding.root
     }
@@ -70,6 +69,24 @@ class SummaryFragment : Fragment(), LifecycleOwner {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter =
                 FlavorAdapter(sharedViewModel, FlavorAdapter.SUMMARY_CALLER, requireContext())
+
+            if (sharedViewModel.orderList.value?.isEmpty() == true) {
+                summaryRecyclerView.visibility = View.GONE
+                pickupLabel.visibility = View.GONE
+                date.visibility = View.GONE
+                total.visibility = View.GONE
+                sendButton.visibility = View.GONE
+
+                ivNoOrder.setImageResource(R.drawable.cupcake)
+                ivNoOrder.visibility = View.VISIBLE
+                tvNoOrder.visibility = View.VISIBLE
+            }
+
+            if (sharedViewModel.pickupOption.value == IN_STORE_OPTION) {
+                pickupLabel.text = getString(R.string.pickup_date)
+            } else {
+                pickupLabel.text = getString(R.string.delivery_date)
+            }
         }
     }
 

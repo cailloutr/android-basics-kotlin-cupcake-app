@@ -1,6 +1,7 @@
 package com.example.cupcake.ui
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,6 +88,7 @@ class FlavorAdapter(
         } else {
             val item = viewModel.orderList.value?.get(position)
             val viewHolder = SummaryViewHolder(holder.itemView)
+
             viewHolder.image.setImageResource(R.drawable.cupcake)
             viewHolder.name.text = item?.name
             viewHolder.flavorQuantity.text =

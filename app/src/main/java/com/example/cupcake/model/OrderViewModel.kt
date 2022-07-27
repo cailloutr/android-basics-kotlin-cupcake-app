@@ -32,15 +32,23 @@ const val PRICE_PER_CUPCAKE = 2.00
 /** Additional cost for same day pickup of an order or delivery */
 const val PRICE_FOR_SAME_DAY_PICKUP = 3.00
 
+/** Pickup option for in store pickup */
+const val IN_STORE_OPTION = 1
+
+/** Pickup option for delivery */
+const val DELIVERY_OPTION = 2
+
+
+
 /**
  * [OrderViewModel] holds information about a cupcake order in terms of quantity, flavor, and
  * pickup date. It also knows how to calculate the total price based on these order details.
  */
 class OrderViewModel : ViewModel() {
 
-    // TODO: Update the summary layout and fragment to accommodate the new elements
-    // TODO: update the price methods to calculate the right price
-    // TODO: create the methods and attributes for the new pickup option and elements
+    // TODO: update the order and summary collect and display tha name of the client and address for delivery
+    // TODO: update the send order method to format the message with the updated formats an elements
+    // TODO: update the layout's codes that don't use data binding
 
     // Name of the person making the order
     private val _clientName = MutableLiveData<String>()
@@ -171,16 +179,6 @@ class OrderViewModel : ViewModel() {
         _quantity.value = quantity
     }
 
-
-    /**
-     * Set the flavor of cupcakes for this order. Only 1 flavor can be selected for the whole order.
-     *
-     * @param desiredFlavor is the cupcake flavor as a List of Flavor
-     */
-    fun setFlavor(desiredFlavor: Flavor) {
-        _flavors.value = _flavors.value?.plus(desiredFlavor) ?: listOf(desiredFlavor)
-    }
-
     /**
      * Set the pickup date for this order.
      *
@@ -208,7 +206,7 @@ class OrderViewModel : ViewModel() {
         _price.value = 0.0
         _clientName.value = ""
         _phoneNumber.value = ""
-        _pickupOption.value = 1
+        _pickupOption.value = IN_STORE_OPTION
     }
 
     /**
@@ -242,9 +240,5 @@ class OrderViewModel : ViewModel() {
             calendar.add(Calendar.DATE, 1)
         }
         return options
-    }
-
-    fun getFlavorList(): LiveData<List<Flavor>> {
-        return flavors
     }
 }
