@@ -76,6 +76,8 @@ class SummaryFragment : Fragment(), LifecycleOwner {
                 date.visibility = View.GONE
                 total.visibility = View.GONE
                 sendButton.visibility = View.GONE
+                divider1.visibility = View.GONE
+                divider3.visibility = View.GONE
 
                 ivNoOrder.setImageResource(R.drawable.cupcake)
                 ivNoOrder.visibility = View.VISIBLE

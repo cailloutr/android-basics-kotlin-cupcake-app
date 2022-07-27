@@ -45,18 +45,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                tools:src="@drawable/cupcake"
+                android:layout_marginTop="32dp"
                 android:importantForAccessibility="no"
-                android:visibility="gone"/>
+                android:visibility="gone"
+                tools:src="@drawable/cupcake" />
 
             <TextView
                 android:id="@+id/tv_no_order"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_between_elements"
                 android:text="@string/no_order"
                 android:textAlignment="center"
-                android:textAppearance="?attr/textAppearanceHeadline6"
-                android:visibility="gone"/>
+                android:textAppearance="?attr/textAppearanceHeadline4"
+                android:textColor="@color/pink_400"
+                android:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/summary_recycler_view"
@@ -89,8 +92,7 @@
                     style="@style/Widget.Cupcake.TextView.Label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    tools:text="@string/pickup_date"
-                    />
+                    tools:text="@string/pickup_date" />
 
                 <TextView
                     android:id="@+id/date"
