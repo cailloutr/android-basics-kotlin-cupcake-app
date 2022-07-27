@@ -48,6 +48,10 @@
     <string name="pickup_options">Pickup Options:</string>
     <string name="pickup_options_obs">Delivery or same day pickup: %s </string>
     <string name="no_order">No Order</string>
+    <string name="address">Address</string>
+    <string name="city">City</string>
+    <string name="state">State</string>
+    <string name="zip">Zip</string>
     <plurals name="cupcakes">
         <item quantity="one">%d cupcake</item>
         <item quantity="other">%d cupcakes</item>
