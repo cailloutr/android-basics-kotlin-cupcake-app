@@ -21,9 +21,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.cupcake.R
 import com.example.cupcake.databinding.FragmentPickupBinding
+import com.example.cupcake.model.DELIVERY_OPTION
 import com.example.cupcake.model.OrderViewModel
 import com.example.cupcake.model.PRICE_FOR_SAME_DAY_PICKUP
 import java.text.NumberFormat
@@ -62,6 +64,16 @@ class PickupFragment : Fragment() {
                 getString(R.string.pickup_options_obs, NumberFormat.getCurrencyInstance().format(
                     PRICE_FOR_SAME_DAY_PICKUP))
         }
+
+        sharedViewModel.pickupOption.observe(viewLifecycleOwner, Observer {
+            if (it == DELIVERY_OPTION) {
+                binding?.addressField?.visibility = View.VISIBLE
+                binding?.divider2?.visibility = View.VISIBLE
+            } else {
+                binding?.addressField?.visibility = View.GONE
+                binding?.divider2?.visibility = View.GONE
+            }
+        })
     }
 
     /**

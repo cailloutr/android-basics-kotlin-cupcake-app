@@ -54,7 +54,8 @@
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:orientation="horizontal"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_pickup_option_type">
+                app:layout_constraintTop_toBottomOf="@id/tv_pickup_option_type"
+                app:layout_constraintBottom_toTopOf="@id/divider1">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -94,27 +95,26 @@
 
             </RadioGroup>
 
+            <!-- Address fields -->
+
             <View
                 android:id="@+id/divider1"
                 style="@style/Widget.Cupcake.Divider"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/side_margin"
-                android:layout_marginBottom="@dimen/side_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rg_pickup_option" />
-
-            <!-- Address fields -->
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/address_field"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toTopOf="@id/date_options"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider1">
+                app:layout_constraintTop_toBottomOf="@id/divider1"
+                android:visibility="gone">
 
                 <ImageView
                     android:id="@+id/iv_location"
@@ -197,7 +197,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent" />
                 </com.google.android.material.textfield.TextInputLayout>
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

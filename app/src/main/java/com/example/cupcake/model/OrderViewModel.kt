@@ -49,6 +49,9 @@ class OrderViewModel : ViewModel() {
     // TODO: update the order and summary collect and display tha name of the client and address for delivery
     // TODO: update the send order method to format the message with the updated formats an elements
     // TODO: update the layout's codes that don't use data binding
+    // TODO: refactor the address view code in the fragment_pickup.xml
+    // TODO: refactor the address view behavior so it only have one line, etc
+
 
     // Name of the person making the order
     private val _clientName = MutableLiveData<String>()
