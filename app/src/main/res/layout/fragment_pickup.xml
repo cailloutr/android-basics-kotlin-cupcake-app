@@ -53,9 +53,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_between_elements"
                 android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@id/divider1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_pickup_option_type"
-                app:layout_constraintBottom_toTopOf="@id/divider1">
+                app:layout_constraintTop_toBottomOf="@id/tv_pickup_option_type">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -95,8 +95,6 @@
 
             </RadioGroup>
 
-            <!-- Address fields -->
-
             <View
                 android:id="@+id/divider1"
                 style="@style/Widget.Cupcake.Divider"
@@ -107,14 +105,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rg_pickup_option" />
 
+            <!-- Address fields -->
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/address_field"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider1"
-                android:visibility="gone">
+                app:layout_constraintTop_toBottomOf="@id/divider1">
 
                 <ImageView
                     android:id="@+id/iv_location"
@@ -142,7 +142,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="@{viewModel.address.address}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -159,7 +161,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="@{viewModel.address.city}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -176,7 +180,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        android:text="@{viewModel.address.state}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -195,7 +201,9 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        android:inputType="number"
+                        android:text="@{viewModel.address.zipCode}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>

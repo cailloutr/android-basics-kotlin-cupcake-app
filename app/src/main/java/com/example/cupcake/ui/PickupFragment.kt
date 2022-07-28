@@ -80,8 +80,21 @@ class PickupFragment : Fragment() {
      * Navigate to the next screen to see the order summary.
      */
     fun goToNextScreen() {
-        sharedViewModel.setOrderList()
+        saveState()
         findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)
+    }
+
+    /**
+     * Save the Location object in the OrderViewModel
+     * */
+    private fun saveState() {
+        sharedViewModel.setOrderList()
+        sharedViewModel.setLocation(
+            binding?.tilAddress?.editText?.text.toString(),
+            binding?.tilCity?.editText?.text.toString(),
+            binding?.tilState?.editText?.text.toString(),
+            binding?.tilZip?.editText?.text.toString()
+        )
     }
 
     /**

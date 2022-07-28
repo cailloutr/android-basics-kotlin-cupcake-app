@@ -61,6 +61,10 @@ class OrderViewModel : ViewModel() {
     private val _phoneNumber = MutableLiveData<String>()
     val phoneNumber: LiveData<String> = _phoneNumber
 
+    // Clients address for delivery option
+    private val _address = MutableLiveData<Location>()
+    val address: LiveData<Location> = _address
+
     // Quantity of cupcakes in this order
     private val _quantity = MutableLiveData<Int>()
     val quantity: LiveData<Int> = _quantity
@@ -102,7 +106,7 @@ class OrderViewModel : ViewModel() {
 
 
     /**
-     *
+     * Populate the list with only the item ordered
      */
     fun setOrderList() {
         val list = mutableListOf<Flavor>()
@@ -122,6 +126,20 @@ class OrderViewModel : ViewModel() {
         _orderList.value = list
     }
 
+    /**
+     * Set the pickup option for this order.
+     *
+     * @param address to order delivery option
+     * @param city to order delivery option
+     * @param state to order delivery option
+     * @param zipCode to order delivery option
+     */
+    fun setLocation(address: String, city: String, state: String, zipCode: String) {
+        _address.value?.address = address
+        _address.value?.city = city
+        _address.value?.state = state
+        _address.value?.zipCode = zipCode
+    }
 
     /**
      * Set the pickup option for this order.
@@ -154,7 +172,7 @@ class OrderViewModel : ViewModel() {
     /**
      * Set the phone number of the client for this order.
      *
-     * @param phoneNumber to order
+     * @param phoneNumber to client
      */
     fun setPhoneNumber(phoneNumber: String) {
         _phoneNumber.value = phoneNumber
@@ -210,6 +228,7 @@ class OrderViewModel : ViewModel() {
         _clientName.value = ""
         _phoneNumber.value = ""
         _pickupOption.value = IN_STORE_OPTION
+        _address.value = Location("", "", "", "")
     }
 
     /**
