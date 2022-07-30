@@ -67,7 +67,7 @@ class StartFragment : Fragment() {
 
         // Update the view model with the name and phone number
         sharedViewModel.setName(binding?.edtName?.text.toString())
-        sharedViewModel.setPhoneNumber(binding?.edtName?.text.toString())
+        sharedViewModel.setPhoneNumber(binding?.edtPhone?.text.toString())
 
         // Navigate to the next destination to select the flavor of the cupcakes
         findNavController().navigate(R.id.action_startFragment_to_flavorFragment)

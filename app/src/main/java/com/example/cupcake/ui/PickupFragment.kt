@@ -16,13 +16,11 @@
 package com.example.cupcake.ui
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.example.cupcake.R
 import com.example.cupcake.databinding.FragmentPickupBinding
@@ -70,7 +68,7 @@ class PickupFragment : Fragment() {
                     PRICE_FOR_SAME_DAY_PICKUP))
         }
 
-        sharedViewModel.pickupOption.observe(viewLifecycleOwner, Observer {
+        sharedViewModel.pickupOption.observe(viewLifecycleOwner) {
             if (it == DELIVERY_OPTION) {
                 binding?.addressField?.visibility = View.VISIBLE
                 binding?.divider2?.visibility = View.VISIBLE
@@ -78,13 +76,13 @@ class PickupFragment : Fragment() {
                 binding?.addressField?.visibility = View.GONE
                 binding?.divider2?.visibility = View.GONE
             }
-        })
+        }
     }
 
     /**
      * Navigate to the next screen to see the order summary.
      */
-    fun goToNextScreen() {
+    private fun goToNextScreen() {
         findNavController().navigate(R.id.action_pickupFragment_to_summaryFragment)
     }
 
@@ -140,6 +138,7 @@ class PickupFragment : Fragment() {
         textInputLayout: TextInputLayout?,
         errorMessage: String
     ) {
+        textInputLayout?.requestFocus()
         textInputLayout?.error = errorMessage
     }
 

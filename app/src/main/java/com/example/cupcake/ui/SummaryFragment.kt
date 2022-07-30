@@ -28,8 +28,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cupcake.R
 import com.example.cupcake.databinding.FragmentSummaryBinding
+import com.example.cupcake.model.DELIVERY_OPTION
 import com.example.cupcake.model.IN_STORE_OPTION
 import com.example.cupcake.model.OrderViewModel
+import com.example.cupcake.model.PRICE_PER_CUPCAKE
 
 /**
  * [SummaryFragment] contains a summary of the order details with a button to share the order
@@ -103,20 +105,38 @@ class SummaryFragment : Fragment(), LifecycleOwner {
      */
     fun sendOrder() {
         // Construct the order summary text with information from the view model
-        val numberOfCupcakes = sharedViewModel.quantity.value ?: 0
-        val orderSummary = getString(
-            R.string.order_details,
-            resources.getQuantityString(R.plurals.cupcakes, numberOfCupcakes, numberOfCupcakes),
-            sharedViewModel.flavors.value.toString(),
-            sharedViewModel.date.value.toString(),
-            sharedViewModel.price.value.toString()
-        )
+
+        var list = getString(R.string.new_cupcake_order, sharedViewModel.clientName.value)
+
+        for (item in sharedViewModel.orderList.value!!) {
+            val numberOfCupcakes = item.quantity ?: 0
+            val orderSummary = getString(
+                R.string.order_details,
+                item.name,
+                item.quantity.toString(),
+                (item.quantity * PRICE_PER_CUPCAKE).toString()
+            )
+
+            list += orderSummary
+        }
+
+        list += if (sharedViewModel.verifyPickupOption() == DELIVERY_OPTION) {
+            getString(R.string.delivery_detail, sharedViewModel.address.value, sharedViewModel.date.value)
+        } else {
+            getString(R.string.pickup_detail, sharedViewModel.date.value)
+        }
+
+        list += getString(R.string.observation_order, sharedViewModel.observations.value)
+        list += getString(R.string.total_price, sharedViewModel.price.value)
 
         // Create an ACTION_SEND implicit intent with order details in the intent extras
         val intent = Intent(Intent.ACTION_SEND)
             .setType("text/plain")
-            .putExtra(Intent.EXTRA_SUBJECT, getString(R.string.new_cupcake_order))
-            .putExtra(Intent.EXTRA_TEXT, orderSummary)
+            .putExtra(
+                Intent.EXTRA_SUBJECT,
+                getString(R.string.new_cupcake_order, sharedViewModel.clientName.value)
+            )
+            .putExtra(Intent.EXTRA_TEXT, list)
 
         // Check if there's an app that can handle this intent before launching it
         if (activity?.packageManager?.resolveActivity(intent, 0) != null) {

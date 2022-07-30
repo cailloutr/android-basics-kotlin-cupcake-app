@@ -50,12 +50,7 @@ val EMPTY_LOCATION = Location("", "", "", "")
 class OrderViewModel : ViewModel() {
 
     // TODO: especial edition: animation in the layout
-
-    // TODO: update the order and summary collect and display tha name of the client and address for delivery
-    // TODO: update the send order method to format the message with the updated formats an elements
     // TODO: update the layout's codes that don't use data binding
-    // TODO: refactor the address view code in the fragment_pickup.xml
-    // TODO: verify if the client provided an valid address before go on
 
 
     // Name of the person making the order
@@ -268,5 +263,12 @@ class OrderViewModel : ViewModel() {
             calendar.add(Calendar.DATE, 1)
         }
         return options
+    }
+
+    fun verifyPickupOption(): Int {
+        return if (pickupOption.value == DELIVERY_OPTION)
+            DELIVERY_OPTION
+        else
+            IN_STORE_OPTION
     }
 }

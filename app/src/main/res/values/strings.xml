@@ -36,11 +36,18 @@
     <string name="pickup_date">Pickup date</string>
     <string name="subtotal_price">Subtotal %s</string>
     <string name="total_price">Total %s</string>
-    <string name="new_cupcake_order">New Cupcake Order</string>
+
+    <string name="new_cupcake_order">New Cupcake Order - %s \n</string>
     <string name="summary_unit_count">%s un.</string>
     <string name="delivery_date">Delivery date</string>
-    <string name="order_details">Quantity: %1$s \n Flavor: %2$s \nPickup date: %3$s \n
-        Total: %4$s \n\n Thank you!</string>
+
+    <string name="order_details">Flavor: %1$s \n Quantity: %2$s \nPrice: %3$s \n</string>
+    <string name="delivery_detail">Delivery at %1s on %2s \n</string>
+    <string name="pickup_detail">Pickup Date: %1s \n</string>
+    <string name="observation_order">Observations: %1s \n</string>
+
+
+
     <string name="name">Name</string>
     <string name="phone">Phone</string>
     <string name="order">Order</string>
