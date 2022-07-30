@@ -103,6 +103,25 @@
                     android:text="@{viewModel.date}"
                     tools:text="Sunday" />
 
+                <TextView
+                    android:id="@+id/address_label"
+                    android:layout_marginTop="@dimen/order_summary_margin"
+                    style="@style/Widget.Cupcake.TextView.Label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    tools:text="Address:"/>
+                
+                <TextView
+                    android:id="@+id/tv_address"
+                    style="@style/Widget.Cupcake.TextView.OrderSummary"
+                    android:layout_marginTop="@dimen/order_summary_margin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.address.toString()}"
+                    android:visibility="gone"
+                    tools:text="Rua Vinhosa, 408, Itaperuna - RJ, CEP: 28300-000"/>
+
                 <View
                     android:id="@+id/divider3"
                     style="@style/Widget.Cupcake.Divider"

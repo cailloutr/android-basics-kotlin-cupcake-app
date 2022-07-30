@@ -52,6 +52,8 @@
     <string name="city">City</string>
     <string name="state">State</string>
     <string name="zip">Zip</string>
+    <string name="pickup_option_in_store">In Store</string>
+    <string name="pickup_option_delivery">Delivery</string>
     <plurals name="cupcakes">
         <item quantity="one">%d cupcake</item>
         <item quantity="other">%d cupcakes</item>

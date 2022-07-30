@@ -38,6 +38,9 @@ const val IN_STORE_OPTION = 1
 /** Pickup option for delivery */
 const val DELIVERY_OPTION = 2
 
+/** Base location for comparison */
+val EMPTY_LOCATION = Location("", "", "", "")
+
 
 
 /**
@@ -46,11 +49,13 @@ const val DELIVERY_OPTION = 2
  */
 class OrderViewModel : ViewModel() {
 
+    // TODO: especial edition: animation in the layout
+
     // TODO: update the order and summary collect and display tha name of the client and address for delivery
     // TODO: update the send order method to format the message with the updated formats an elements
     // TODO: update the layout's codes that don't use data binding
     // TODO: refactor the address view code in the fragment_pickup.xml
-    // TODO: refactor the address view behavior so it only have one line, etc
+    // TODO: verify if the client provided an valid address before go on
 
 
     // Name of the person making the order
@@ -135,6 +140,7 @@ class OrderViewModel : ViewModel() {
      * @param zipCode to order delivery option
      */
     fun setLocation(address: String, city: String, state: String, zipCode: String) {
+        //_address.value = Location(address, city, state, zipCode)
         _address.value?.address = address
         _address.value?.city = city
         _address.value?.state = state
@@ -228,7 +234,7 @@ class OrderViewModel : ViewModel() {
         _clientName.value = ""
         _phoneNumber.value = ""
         _pickupOption.value = IN_STORE_OPTION
-        _address.value = Location("", "", "", "")
+        _address.value = Location()
     }
 
     /**

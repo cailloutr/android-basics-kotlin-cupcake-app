@@ -30,4 +30,7 @@
     <dimen name="item_view_margin">4dp</dimen>
     <dimen name="item_view_size">50dp</dimen>
     <dimen name="square_button_picker_size">28dp</dimen>
+    <dimen name="ic_location_dimens">30dp</dimen>
+    <dimen name="default_margin">16dp</dimen>
+    <dimen name="half_default_margin">8dp</dimen>
 </resources>

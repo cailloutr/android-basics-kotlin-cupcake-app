@@ -78,6 +78,8 @@ class SummaryFragment : Fragment(), LifecycleOwner {
                 sendButton.visibility = View.GONE
                 divider1.visibility = View.GONE
                 divider3.visibility = View.GONE
+                addressLabel.visibility = View.GONE
+                tvAddress.visibility = View.GONE
 
                 ivNoOrder.setImageResource(R.drawable.cupcake)
                 ivNoOrder.visibility = View.VISIBLE
@@ -86,8 +88,12 @@ class SummaryFragment : Fragment(), LifecycleOwner {
 
             if (sharedViewModel.pickupOption.value == IN_STORE_OPTION) {
                 pickupLabel.text = getString(R.string.pickup_date)
+                addressLabel.visibility = View.GONE
+                tvAddress.visibility = View.GONE
             } else {
                 pickupLabel.text = getString(R.string.delivery_date)
+                addressLabel.visibility = View.VISIBLE
+                tvAddress.visibility = View.VISIBLE
             }
         }
     }

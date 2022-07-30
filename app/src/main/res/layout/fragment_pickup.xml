@@ -73,8 +73,8 @@
                     android:layout_marginEnd="@dimen/half_margin_between_elements"
                     android:checked="@{viewModel.pickupOption.equals(1)}"
                     android:onClick="@{() -> viewModel.setPickupOption(1)}"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    tools:text="In Store" />
+                    android:text="@string/pickup_option_in_store"
+                    android:textAppearance="?attr/textAppearanceBody2" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -90,8 +90,8 @@
                     android:layout_height="wrap_content"
                     android:checked="@{viewModel.pickupOption.equals(2)}"
                     android:onClick="@{() -> viewModel.setPickupOption(2)}"
-                    android:textAppearance="?attr/textAppearanceBody2"
-                    tools:text="Delivery" />
+                    android:text="@string/pickup_option_delivery"
+                    android:textAppearance="?attr/textAppearanceBody2" />
 
             </RadioGroup>
 
@@ -100,7 +100,7 @@
                 style="@style/Widget.Cupcake.Divider"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_marginTop="@dimen/side_margin"
+                android:layout_marginTop="@dimen/default_margin"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rg_pickup_option" />
@@ -118,10 +118,10 @@
 
                 <ImageView
                     android:id="@+id/iv_location"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="@dimen/ic_location_dimens"
+                    android:layout_height="@dimen/ic_location_dimens"
                     android:layout_marginStart="@dimen/half_margin_between_elements"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="@dimen/margin_between_elements"
                     android:src="@drawable/ic_location_on_24"
                     app:layout_constraintBottom_toBottomOf="@id/til_address"
                     app:layout_constraintEnd_toStartOf="@id/til_address"
@@ -133,9 +133,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/half_default_margin"
                     android:hint="@string/address"
+                    app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/iv_location"
                     app:layout_constraintTop_toTopOf="parent">
@@ -152,9 +153,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/half_default_margin"
                     android:hint="@string/city"
+                    app:errorEnabled="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/til_address"
                     app:layout_constraintTop_toBottomOf="@id/til_address">
@@ -171,9 +173,10 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/default_margin"
                     android:hint="@string/state"
+                    app:errorEnabled="true"
                     app:layout_constraintEnd_toStartOf="@id/til_zip"
                     app:layout_constraintStart_toStartOf="@id/til_city"
                     app:layout_constraintTop_toBottomOf="@id/til_city">
@@ -190,10 +193,11 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="@dimen/default_margin"
+                    android:layout_marginEnd="@dimen/half_default_margin"
+                    android:layout_marginBottom="@dimen/default_margin"
                     android:hint="@string/zip"
+                    app:errorEnabled="true"
                     app:layout_constraintBottom_toBottomOf="@id/address_field"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/til_state"
@@ -305,7 +309,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/side_margin"
-                android:onClick="@{() -> pickupFragment.goToNextScreen()}"
+                android:onClick="@{() -> pickupFragment.verifyAddressBeforeGotoNextScreen()}"
                 android:text="@string/next"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
