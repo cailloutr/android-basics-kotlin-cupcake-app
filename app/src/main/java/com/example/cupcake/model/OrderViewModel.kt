@@ -23,8 +23,7 @@ import androidx.lifecycle.ViewModel
 import com.example.cupcake.data.Datasource
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import java.util.*
 
 /** Price for a single cupcake */
 const val PRICE_PER_CUPCAKE = 2.00
@@ -38,10 +37,6 @@ const val IN_STORE_OPTION = 1
 /** Pickup option for delivery */
 const val DELIVERY_OPTION = 2
 
-/** Base location for comparison */
-val EMPTY_LOCATION = Location("", "", "", "")
-
-
 
 /**
  * [OrderViewModel] holds information about a cupcake order in terms of quantity, flavor, and
@@ -50,6 +45,7 @@ val EMPTY_LOCATION = Location("", "", "", "")
 class OrderViewModel : ViewModel() {
 
     // TODO: especial edition: animation in the layout
+    // TODO: add new flavor with particularities like, no delivery or same date pickup
     // TODO: update the layout's codes that don't use data binding
 
 

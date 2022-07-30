@@ -121,7 +121,9 @@ class SummaryFragment : Fragment(), LifecycleOwner {
         }
 
         list += if (sharedViewModel.verifyPickupOption() == DELIVERY_OPTION) {
-            getString(R.string.delivery_detail, sharedViewModel.address.value, sharedViewModel.date.value)
+            getString(R.string.delivery_detail,
+                sharedViewModel.address.value,
+                sharedViewModel.date.value)
         } else {
             getString(R.string.pickup_detail, sharedViewModel.date.value)
         }

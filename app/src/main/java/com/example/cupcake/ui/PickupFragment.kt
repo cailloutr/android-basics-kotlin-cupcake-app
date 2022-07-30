@@ -136,7 +136,7 @@ class PickupFragment : Fragment() {
     // Set the error message in the empty textInputs layout
     private fun setErrorMessageInAddressForm(
         textInputLayout: TextInputLayout?,
-        errorMessage: String
+        errorMessage: String,
     ) {
         textInputLayout?.requestFocus()
         textInputLayout?.error = errorMessage
